@@ -96,7 +96,7 @@ function Content() {
               <div className='relative'>
                 <h1 className='text-2xl py-3 px-4 bg-pink-800'>
                   Private Key <br />
-                  {showPrivateKey ? 'On-it' : '••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••'}
+                  {showPrivateKey ? 'On-itn' : '••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••'}
                 </h1>
                 <button
                   onClick={toggleShowPrivateKey}
@@ -106,7 +106,7 @@ function Content() {
                 </button>
               </div>
             </div>
-            <div className='mt-10'>
+            <div className='mt-10 cursor-pointer'>
               <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT4BobdMLXfDMvVEAVbrhQqfxX5s0tDp1pkLQ&s" alt="" className='h-12 hover:border-2 rounded-full hover:scale-110 border-red-600 transition duration-300 ease-in-out' /> Add Wallet
             </div>
           </div>
