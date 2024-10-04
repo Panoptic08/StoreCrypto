@@ -8,9 +8,11 @@ import { FaEye, FaEyeSlash } from 'react-icons/fa';
 function Content() {
   // Declare publicKey as a string or null
   const [publicKey, setPublicKey] = useState<string | null>(null);
+  const [pKey, setPKey] = useState<string | null>(null);
   const [darkMode, setDarkMode] = useState<boolean>(false);
   const [nemo, setMnemonic] = useState<string>("");
   const [showPrivateKey, setShowPrivateKey] = useState<boolean>(false);
+  const [mnemonic, setmnemonic] = useState("");
 
   const generate = () => {
     if (!nemo) {
@@ -19,12 +21,16 @@ function Content() {
       return;
     }
     try {
+      
       const seed = mnemonicToSeedSync(nemo);
       const path = `m/44'/501'/0'/0'`; // Derivation path
       const derivedSeed = derivePath(path, seed.toString('hex')).key;
       const secret = nacl.sign.keyPair.fromSeed(derivedSeed).secretKey;
       const pbKey = Keypair.fromSecretKey(secret).publicKey.toBase58();
+      const keypair = Keypair.fromSecretKey(secret);
+      
       setPublicKey(pbKey); // Setting a string to publicKey
+
     } catch (error) {
       console.error('Error generating key:', error);
     }
@@ -80,12 +86,26 @@ function Content() {
             placeholder='Enter Seed phrase or Generate new...'
             onChange={(e) => setMnemonic(e.target.value)}
           />
+         <button  className='bg-gray-800 text-white text-2xl rounded-xl py-3 px-4 hover:scale-110 hover:bg-gray-400' onClick={async function() {
+  const mn = await generateMnemonic();
+  setmnemonic(mn)
+}}>
+            Create seed Phase
+          </button>
           <button
             className='bg-gray-800 text-white text-2xl rounded-xl py-3 px-4 hover:scale-110 hover:bg-gray-400'
             onClick={generate}
           >
             Generate
           </button>
+        </div>
+
+        <div> 
+          {mnemonic && (
+            <div className='text-white'>
+              {mnemonic}
+            </div>
+          )}
         </div>
       </div>
       {publicKey && (
@@ -97,7 +117,7 @@ function Content() {
               <div className='relative'>
                 <h1 className='text-2xl py-3 px-4 bg-pink-800'>
                   Private Key <br />
-                  {showPrivateKey ? 'On-itn' : '••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••'}
+                  {showPrivateKey ?showPrivateKey : '••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••'}
                 </h1>
                 <button
                   onClick={toggleShowPrivateKey}
