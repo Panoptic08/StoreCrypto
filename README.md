@@ -1,3 +1,4 @@
+made a change
 # Coinz - Web-Based Wallet
 Coinz is a secure, web-based cryptocurrency wallet designed to manage multiple crypto assets. Built with modern web technologies, Coinz allows users to store, send, and receive cryptocurrencies effortlessly.
 
